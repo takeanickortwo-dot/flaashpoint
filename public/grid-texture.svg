@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" fill="none">
+  <!-- 48px blueprint grid, 1px lines -->
+  <g stroke="rgba(232,230,220,0.028)" stroke-width="1">
+    <line x1="48" y1="0" x2="48" y2="240" />
+    <line x1="96" y1="0" x2="96" y2="240" />
+    <line x1="144" y1="0" x2="144" y2="240" />
+    <line x1="192" y1="0" x2="192" y2="240" />
+    <line x1="0" y1="48" x2="240" y2="48" />
+    <line x1="0" y1="96" x2="240" y2="96" />
+    <line x1="0" y1="144" x2="240" y2="144" />
+    <line x1="0" y1="192" x2="240" y2="192" />
+  </g>
+  <!-- slightly stronger line every 5th cell (tile edge) -->
+  <g stroke="rgba(232,230,220,0.05)" stroke-width="1">
+    <line x1="0.5" y1="0" x2="0.5" y2="240" />
+    <line x1="0" y1="0.5" x2="240" y2="0.5" />
+  </g>
+  <!-- tiny plus-crosses at intersections -->
+  <g stroke="rgba(232,230,220,0.05)" stroke-width="1">
+    <path d="M 46 48 h 4 M 48 46 v 4" />
+    <path d="M 94 48 h 4 M 96 46 v 4" />
+    <path d="M 142 48 h 4 M 144 46 v 4" />
+    <path d="M 190 48 h 4 M 192 46 v 4" />
+    <path d="M 46 96 h 4 M 48 94 v 4" />
+    <path d="M 94 96 h 4 M 96 94 v 4" />
+    <path d="M 142 96 h 4 M 144 94 v 4" />
+    <path d="M 190 96 h 4 M 192 94 v 4" />
+    <path d="M 46 144 h 4 M 48 142 v 4" />
+    <path d="M 94 144 h 4 M 96 142 v 4" />
+    <path d="M 142 144 h 4 M 144 142 v 4" />
+    <path d="M 190 144 h 4 M 192 142 v 4" />
+    <path d="M 46 192 h 4 M 48 190 v 4" />
+    <path d="M 94 192 h 4 M 96 190 v 4" />
+    <path d="M 142 192 h 4 M 144 190 v 4" />
+    <path d="M 190 192 h 4 M 192 190 v 4" />
+  </g>
+</svg>

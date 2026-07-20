@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <!-- outer circle broken at 4 cardinal points -->
+  <g stroke="#FFB000" stroke-width="1.5" fill="none">
+    <path d="M 55.64 36.17 A 24 24 0 0 1 36.17 55.64" />
+    <path d="M 27.83 55.64 A 24 24 0 0 1 8.36 36.17" />
+    <path d="M 8.36 27.83 A 24 24 0 0 1 27.83 8.36" />
+    <path d="M 36.17 8.36 A 24 24 0 0 1 55.64 27.83" />
+  </g>
+  <!-- center plus-sign cross -->
+  <g stroke="#FFB000" stroke-width="1.5">
+    <line x1="32" y1="24" x2="32" y2="40" />
+    <line x1="24" y1="32" x2="40" y2="32" />
+  </g>
+  <!-- radar contact dot, offset upper-right inside ring -->
+  <circle cx="44" cy="20" r="2.2" fill="#FFB000" />
+</svg>

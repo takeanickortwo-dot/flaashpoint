@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* shadcn variables mapped to the FLASHPOINT palette (design.md §2) */
+    --background: 90 10% 4%; /* void #0A0B09 */
+    --foreground: 50 17% 89%; /* bone #E8E6DC */
+    --card: 100 9% 7%; /* console #111310 */
+    --card-foreground: 50 17% 89%;
+    --popover: 100 9% 7%;
+    --popover-foreground: 50 17% 89%;
+    --primary: 42 100% 50%; /* phosphor #FFB000 */
+    --primary-foreground: 90 10% 4%;
+    --secondary: 90 13% 9%; /* raised #181B15 */
+    --secondary-foreground: 50 17% 89%;
+    --muted: 90 13% 9%;
+    --muted-foreground: 80 8% 57%; /* field #969B8A */
+    --accent: 90 13% 9%;
+    --accent-foreground: 42 100% 50%;
+    --destructive: 4 100% 62%; /* signal-red #FF4A3D */
+    --destructive-foreground: 50 17% 89%;
+    --border: 87 12% 15%; /* hairline #272B22 */
+    --input: 87 12% 15%;
+    --ring: 42 100% 50%; /* phosphor focus ring — amber, never blue */
+    --radius: 0.125rem; /* 2px max, per design.md §1 */
+    --sidebar-background: 100 9% 7%;
+    --sidebar-foreground: 50 17% 89%;
+    --sidebar-primary: 42 100% 50%;
+    --sidebar-primary-foreground: 90 10% 4%;
+    --sidebar-accent: 90 13% 9%;
+    --sidebar-accent-foreground: 50 17% 89%;
+    --sidebar-border: 87 12% 15%;
+    --sidebar-ring: 42 100% 50%;
+  }
+
+  .dark {
+    --background: 90 10% 4%;
+    --foreground: 50 17% 89%;
+    --card: 100 9% 7%;
+    --card-foreground: 50 17% 89%;
+    --popover: 100 9% 7%;
+    --popover-foreground: 50 17% 89%;
+    --primary: 42 100% 50%;
+    --primary-foreground: 90 10% 4%;
+    --secondary: 90 13% 9%;
+    --secondary-foreground: 50 17% 89%;
+    --muted: 90 13% 9%;
+    --muted-foreground: 80 8% 57%;
+    --accent: 90 13% 9%;
+    --accent-foreground: 42 100% 50%;
+    --destructive: 4 100% 62%;
+    --destructive-foreground: 50 17% 89%;
+    --border: 87 12% 15%;
+    --input: 87 12% 15%;
+    --ring: 42 100% 50%;
+    --sidebar-background: 100 9% 7%;
+    --sidebar-foreground: 50 17% 89%;
+    --sidebar-primary: 42 100% 50%;
+    --sidebar-primary-foreground: 90 10% 4%;
+    --sidebar-accent: 90 13% 9%;
+    --sidebar-accent-foreground: 50 17% 89%;
+    --sidebar-border: 87 12% 15%;
+    --sidebar-ring: 42 100% 50%;
+  }
+
+  html {
+    color-scheme: dark;
+    scrollbar-color: #3b4136 #0a0b09;
+  }
+
+  body {
+    @apply bg-void text-bone font-sans antialiased;
+    font-variant-numeric: tabular-nums;
+    /* Vignette: corners darkened ~18% (design.md §5.3) */
+    background-image: radial-gradient(
+      ellipse 120% 90% at 50% 40%,
+      transparent 55%,
+      rgba(0, 0, 0, 0.18) 100%
+    );
+    background-attachment: fixed;
+  }
+
+  /* Blueprint grid — fixed layer behind everything (design.md §5.1) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(232, 230, 220, 0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232, 230, 220, 0.028) 1px, transparent 1px),
+      linear-gradient(rgba(232, 230, 220, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232, 230, 220, 0.05) 1px, transparent 1px);
+    background-size:
+      48px 48px,
+      48px 48px,
+      240px 240px,
+      240px 240px;
+  }
+
+  /* CRT scanlines — fixed overlay above everything, never intercepts input (§5.2) */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0 2px,
+      rgba(0, 0, 0, 0.16) 2px 3px
+    );
+  }
+
+  ::selection {
+    background: rgba(255, 176, 0, 0.25);
+    color: #e8e6dc;
+  }
+
+  :focus-visible {
+    outline: 1px solid #ffb000;
+    outline-offset: 2px;
+  }
+
+  a {
+    @apply text-phosphor;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0b09;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3b4136;
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #5b6053;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Corner-bracket motif — primary instruments only (design.md §4).
+     Four 10px L-shaped ticks in hairline-strong, 2px outside the border. */
+  .panel-bracketed {
+    position: relative;
+  }
+  .panel-bracketed::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    pointer-events: none;
+    background:
+      linear-gradient(#3b4136, #3b4136) top left / 10px 1px,
+      linear-gradient(#3b4136, #3b4136) top left / 1px 10px,
+      linear-gradient(#3b4136, #3b4136) top right / 10px 1px,
+      linear-gradient(#3b4136, #3b4136) top right / 1px 10px,
+      linear-gradient(#3b4136, #3b4136) bottom left / 10px 1px,
+      linear-gradient(#3b4136, #3b4136) bottom left / 1px 10px,
+      linear-gradient(#3b4136, #3b4136) bottom right / 10px 1px,
+      linear-gradient(#3b4136, #3b4136) bottom right / 1px 10px;
+    background-repeat: no-repeat;
+  }
+
+  /* 4% fractal noise overlay for panels (design.md §5.4) */
+  .panel-noise {
+    position: relative;
+  }
+  .panel-noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Section header voice (design.md §3 h-section) */
+  .h-section {
+    @apply font-mono text-xs font-bold uppercase tracking-[0.22em] text-bone;
+  }
+
+  /* Field label voice (design.md §3 label) */
+  .fp-label {
+    @apply font-mono text-[10.5px] font-medium uppercase tracking-[0.16em] text-field;
+  }
+}
